@@ -1,8 +1,8 @@
 from django.urls import path
-
+from api.views import Direccion
 
 urlpatterns = [
-    #path('api_list/', API_TemplateView.as_view(), name="api_list"),
+    path('direccion/', Direccion.as_view(), name="direccion"),
 ]
 
 
