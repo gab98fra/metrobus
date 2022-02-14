@@ -48,7 +48,7 @@ class Metrobusmodel(models.Model):
     trip_start_date=models.IntegerField(blank=True, null=True)
     trip_route_id=models.IntegerField(blank=True, null=True)
     alcaldia=models.ForeignKey(AlcaldiaModel, on_delete=models.CASCADE, blank=True, null=True)
-    direccion=models.ForeignKey(DireccionCompletaModel, on_delete=models.CASCADE, blank=True, null=True)
+    direccion=models.OneToOneField(DireccionCompletaModel, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = 'metrobus'
