@@ -39,15 +39,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'import_export',
     'rest_framework.authtoken',
     'api',
 ]
 
-REST_FRAMEWORK={
-    'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.AllowAny',
-    ]
+DEFAULT_RENDERER_CLASSES = (
+    'rest_framework.renderers.JSONRenderer', # deshabilita la interfaz navegable
+)
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES = DEFAULT_RENDERER_CLASSES + (
+        'rest_framework.renderers.BrowsableAPIRenderer', # Activar para entornos de prueba
+    )
+REST_FRAMEWORK = {
+        'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+        ],
+        'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+        # 'DEFAULT_PAGINATION_CLASS': 'config.pagination.CustomPagination',
+        # 'PAGE_SIZE': 20
+
+        # interfaz navegable
+        'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
