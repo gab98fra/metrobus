@@ -3,14 +3,20 @@ from rest_framework.serializers import ModelSerializer
 from api.models import Metrobusmodel, AlcaldiaModel
 
 class MetrobusSerializer(ModelSerializer):
-    "Lista de unidades"
+    """Lista de unidades metrobús
+        
+        :param:ModelSerializer serializador referencia para modelos
+    """
 
     class Meta:
         model=Metrobusmodel
         fields="__all__"
 
 class MetrobusConsultarSerializer(serializers.Serializer):
-    "Consultar metrobus con su ubicación"
+    """Consultar metrobus con su ubicación
+        
+        :param: Serializer serializador
+    """
     
     id=serializers.IntegerField(help_text="id metrobús")
     
@@ -31,6 +37,8 @@ class AlcaldiaSerializer(ModelSerializer):
 
 
 class AlcaldiaConsultarSerializer(serializers.Serializer):
+    "Serializado para consultar unidades de metrobús por alcadía"
+    
     id=serializers.IntegerField(help_text="id alcaldia")
     
     def validate_id(self, value):

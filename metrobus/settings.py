@@ -26,7 +26,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -58,9 +58,6 @@ REST_FRAMEWORK = {
             'rest_framework.authentication.SessionAuthentication',
         ],
         'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-        # 'DEFAULT_PAGINATION_CLASS': 'config.pagination.CustomPagination',
-        # 'PAGE_SIZE': 20
-
         # interfaz navegable
         'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }

@@ -5,9 +5,13 @@ from api.serialiazers import MetrobusSerializer, MetrobusConsultarSerializer, Al
 from api.models import Metrobusmodel, AlcaldiaModel
 
 class ListaUnidades(APIView):
-    "Get:Muestra la lista de unidades disponibles, post: consultar la unidad enviando el id"
+    """Lista de unidades de metrobús disponibles
+
+        :param:APIView genérico drf
+    """
     
     def get(self, request):
+        "Muestra la lista de unidades disponibles"
 
         api=Metrobusmodel.objects.all()
         serializer=MetrobusSerializer(api, many=True)
@@ -15,6 +19,7 @@ class ListaUnidades(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        "consultar la ubicación de la unidad de metrobuús enviando el id"
 
         serializer = MetrobusConsultarSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,12 +37,15 @@ class ListaUnidades(APIView):
         return Response(response, status=status.HTTP_200_OK)
 
     def get_serializer(self):
+        "Especificación de serialiazer"
+        
         return MetrobusConsultarSerializer()
 
 class ListaAlcaldia(APIView):
-    "Get:Muestra la lista de alcaldías disponibles, post: consultar unidades dentro de la alcaldía"
+    "Get:, post: consultar unidades dentro de la alcaldía"
 
     def get(self, request):
+        "Muestra la lista de alcaldías disponibles"
 
         api=AlcaldiaModel.objects.all()
         serializer=AlcaldiaSerializer(api, many=True)
@@ -45,6 +53,7 @@ class ListaAlcaldia(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        "Consulta las unidades de metrobús dentro de la alcaldía especificada"
 
         serializer = AlcaldiaConsultarSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -66,4 +75,5 @@ class ListaAlcaldia(APIView):
         return Response({"id_alcaldia": alcaldia.id, "alcadia": alcaldia.alcaldia,"Unidades":lista}, status=status.HTTP_200_OK)
     
     def get_serializer(self):
+
         return AlcaldiaConsultarSerializer()
