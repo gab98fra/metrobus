@@ -71,3 +71,11 @@ class Direccionmodel(models.Model):
         managed = True
         db_table = 'direccion'
 
+
+class MensajeMovil(models.Model):
+    "Consumo de api examen móvil"
+
+    id=models.AutoField(primary_key=True)
+    texto=models.TextField(max_length=140)
+    created=models.DateField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)

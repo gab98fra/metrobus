@@ -2,6 +2,20 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from api.models import Metrobusmodel, AlcaldiaModel
 
+
+class MensajeSerializer(serializers.Serializer):
+    "Mensaje examen api movil"
+    
+    mensaje=serializers.CharField(help_text="id metrobús")
+    
+    def validate_mensaje(self, value):
+        if len(value)<141:
+            pass
+        else:
+            raise serializers.ValidationError("La longitud es mayor a lo aceptado")
+        return value
+
+
 class MetrobusSerializer(ModelSerializer):
     "Lista de unidades"
 

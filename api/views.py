@@ -1,8 +1,25 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from api.serialiazers import MetrobusSerializer, MetrobusConsultarSerializer, AlcaldiaSerializer, AlcaldiaConsultarSerializer
-from api.models import Metrobusmodel, AlcaldiaModel
+from api.serialiazers import MetrobusSerializer, MetrobusConsultarSerializer, AlcaldiaSerializer, AlcaldiaConsultarSerializer, MensajeSerializer
+from api.models import Metrobusmodel, AlcaldiaModel, MensajeMovil
+
+
+class MensajeMovilView(APIView):
+    
+    def post(self, request):
+
+        serializer = MensajeSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        MensajeMovil.objects.create(
+            texto=serializer.data.get('mensaje')
+        )
+
+        return Response({"result": 1}, status=status.HTTP_200_OK)
+    
+    def get_serializer(self):
+        return MensajeSerializer()
 
 class ListaUnidades(APIView):
     "Get:Muestra la lista de unidades disponibles, post: consultar la unidad enviando el id"

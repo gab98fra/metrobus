@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from api.models import AlcaldiaModel, Metrobusmodel, Direccionmodel
+from api.models import AlcaldiaModel, Metrobusmodel, Direccionmodel, MensajeMovil
 
 
 class MetrobusResource(resources.ModelResource):
@@ -30,4 +30,4 @@ class AlcaldiaAdmin(ImportExportModelAdmin ,admin.ModelAdmin):
 admin.site.register(AlcaldiaModel, AlcaldiaAdmin)
 admin.site.register(Metrobusmodel, MetrobusAdmin)
 admin.site.register(Direccionmodel)
-
+admin.site.register(MensajeMovil)
